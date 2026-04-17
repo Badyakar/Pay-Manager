@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "Employee": {
+      "title": "Employee",
+      "description": "Employee payroll and personal details",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "department": { "type": "string" },
+        "designation": { "type": "string" },
+        "joiningDate": { "type": "string" },
+        "grade": { "type": "string" },
+        "uan": { "type": "string" },
+        "email": { "type": "string" },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Pending"] },
+        "attendance": { "type": "object" },
+        "earnings": { "type": "object" },
+        "deductions": { "type": "object" }
+      },
+      "required": ["code", "name", "email"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Application settings",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "companyAddress": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "backgroundUrl": { "type": "string" },
+        "smtpConfig": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "employees": {
+      "schema": "Employee",
+      "description": "Collection of employee records"
+    },
+    "settings": {
+      "schema": "Settings",
+      "description": "Global application settings"
+    }
+  }
+}
