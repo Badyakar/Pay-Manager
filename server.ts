@@ -148,12 +148,17 @@ async function startServer() {
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-      base: "/",
-    });
-    app.use(vite.middlewares);
+    try {
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+        base: "/",
+      });
+      app.use(vite.middlewares);
+      console.log("Vite development middleware integrated successfully.");
+    } catch (error) {
+      console.error("Failed to initialize Vite development server:", error);
+    }
   } else {
     const distPath = path.join(process.cwd(), "dist");
     

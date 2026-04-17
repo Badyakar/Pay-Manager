@@ -272,13 +272,17 @@ export default function App() {
     }
 
     // Force reset for the new requirement
-    const hasReset = localStorage.getItem('payroll_final_reset_v4');
-    if (!hasReset) {
-      localStorage.clear(); // Clear everything
-      localStorage.setItem('payroll_final_reset_v4', 'true');
-      setEmployees([]);
-      setSettings(DEFAULT_SETTINGS);
-      window.location.reload(); // Reload to apply clean state
+    try {
+      const hasReset = localStorage.getItem('payroll_final_reset_v4');
+      if (!hasReset) {
+        localStorage.clear(); // Clear everything
+        localStorage.setItem('payroll_final_reset_v4', 'true');
+        setEmployees([]);
+        setSettings(DEFAULT_SETTINGS);
+        // Removed window.location.reload() to prevent potential infinite loops in some environments
+      }
+    } catch (e) {
+      console.error('LocalStorage access error:', e);
     }
   }, []);
 
